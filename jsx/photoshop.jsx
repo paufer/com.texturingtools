@@ -12,10 +12,11 @@ function offsetHalf() {
         activeDoc = app.activeDocument;
         app.preferences.rulerUnits = Units.PIXELS;
         activeDoc.activeLayer.applyOffset(activeDoc.width/2,activeDoc.height/2,OffsetUndefinedAreas.WRAPAROUND);
+
+        return 1;
     }catch(err) {
         return err;
     }
-    return "Done!";
 }
 
 function equalizeImage(extensionRoot){
@@ -23,18 +24,26 @@ function equalizeImage(extensionRoot){
         //$.evalFile(extensionRoot);
         activeDoc = app.activeDocument;
         app.preferences.rulerUnits = Units.PIXELS;
-/*
+
+        /*
         var layerRef = activeDoc.layers[0];
         activeDoc.layers[0].duplicate(activeDoc.layers[0],ElementPlacement.PLACEBEFORE);
         activeDoc.layers[1].applyAverage();
         activeDoc.activeLayer = activeDoc.layers[0];
         activeDoc.activeLayer.opacity=50;
         activeDoc.activeLayer.blendMode  = BlendMode.LINEARLIGHT;
+        */
 
-*/
+        activeDoc.activeLayer.duplicate(activeDoc.activeLayer,ElementPlacement.PLACEAFTER).applyAverage();
+        activeDoc.activeLayer.opacity=50;
+        activeDoc.activeLayer.blendMode  = BlendMode.LINEARLIGHT;
+        activeDoc.activeLayer.applyHighPass = 50;
+
+
+        /*
         app.load(new File(extensionRoot+"/actions/TexturingTools.atn"));
         app.doAction("Equalize_100","TexturingTools");
-
+        */
 
         //activeDoc.artLayers[1].applyAverage();
         //doc.layers[0].move(doc.activeLayer, ElementPlacement.PLACEAFTER)
@@ -46,10 +55,20 @@ function equalizeImage(extensionRoot){
         /*var layerRef = doc.layers[0];
         layerRef.move(duplicatedLayer, ElementPlacement.PLACEAFTER)*/
 
-
-
+        return 1;
+        
     }catch(err) {
         return err;
     }
-    return extensionRoot;
+}
+
+function createMaps(extensionRoot){
+    try {
+        var Script1 = File(extensionRoot + "/jsx/NormalToAO.jsx");
+        $.evalFile (Script1);
+        return 1;
+    }catch(err) {
+        return err;
+    }
+
 }

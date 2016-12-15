@@ -19,12 +19,12 @@ function loadJSX(filename) {
 
 }
 function showResultText(result,textId){
-    if(result == "Done!"){
+    if(result == 1){
         $("#"+textId).text("Done!");
         $("#"+textId).addClass("text-success");
     }else {
         $("#"+textId).text(result);
-        $("#"+textId).addClass("text-default");
+        $("#"+textId).addClass("text-danger");
     }
 }
 
@@ -37,11 +37,18 @@ function init() {
             showResultText(result,"OffsetText");
         });
     });
-    //Boton Offset
+    //Boton Equalize
     $("#btnEqualize").click(function () {
         console.log("Botón Clicado: btnEqualize");
         csInterface.evalScript('equalizeImage("'+extensionRoot+'")', function(result) {
             showResultText(result,"EqualizeText");
+        });
+    });
+    //Boton Offset
+    $("#btnCreateMaps").click(function () {
+        console.log("Botón Clicado: btnEqualize");
+        csInterface.evalScript('createMaps("'+extensionRoot+'")', function(result) {
+            showResultText(result,"CreateMapsText");
         });
     });
 }
