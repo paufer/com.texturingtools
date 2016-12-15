@@ -40,13 +40,14 @@ function init() {
     //Boton Equalize
     $("#btnEqualize").click(function () {
         console.log("Botón Clicado: btnEqualize");
-        csInterface.evalScript('equalizeImage("'+extensionRoot+'")', function(result) {
+        var valueEqualize = $("#equalizeValue").val();
+        csInterface.evalScript('equalizeImage("'+valueEqualize+'")', function(result) {
             showResultText(result,"EqualizeText");
         });
     });
-    //Boton Offset
+    //Boton Create AO / Cavity Map
     $("#btnCreateMaps").click(function () {
-        console.log("Botón Clicado: btnEqualize");
+        console.log("Botón Clicado: btnCreateMaps");
         csInterface.evalScript('createMaps("'+extensionRoot+'")', function(result) {
             showResultText(result,"CreateMapsText");
         });

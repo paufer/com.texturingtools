@@ -7,6 +7,7 @@ function addDocument() {
 function getDocName(){
     return app.documents.length ? app.activeDocument.name : "No docs open!";
 }
+
 function offsetHalf() {
     try {
         activeDoc = app.activeDocument;
@@ -19,44 +20,23 @@ function offsetHalf() {
     }
 }
 
-function equalizeImage(extensionRoot){
+function equalizeImage(valueEqualize){
     try {
-        //$.evalFile(extensionRoot);
         activeDoc = app.activeDocument;
         app.preferences.rulerUnits = Units.PIXELS;
-
-        /*
-        var layerRef = activeDoc.layers[0];
-        activeDoc.layers[0].duplicate(activeDoc.layers[0],ElementPlacement.PLACEBEFORE);
-        activeDoc.layers[1].applyAverage();
-        activeDoc.activeLayer = activeDoc.layers[0];
-        activeDoc.activeLayer.opacity=50;
-        activeDoc.activeLayer.blendMode  = BlendMode.LINEARLIGHT;
-        */
+        //activeDoc.layers[1].applyAverage();
+        //docRef.layers["Layer 1"]
 
         activeDoc.activeLayer.duplicate(activeDoc.activeLayer,ElementPlacement.PLACEAFTER).applyAverage();
         activeDoc.activeLayer.opacity=50;
         activeDoc.activeLayer.blendMode  = BlendMode.LINEARLIGHT;
-        activeDoc.activeLayer.applyHighPass = 50;
-
+        activeDoc.activeLayer.applyHighPass = valueEqualize;
 
         /*
         app.load(new File(extensionRoot+"/actions/TexturingTools.atn"));
         app.doAction("Equalize_100","TexturingTools");
         */
-
-        //activeDoc.artLayers[1].applyAverage();
-        //doc.layers[0].move(doc.activeLayer, ElementPlacement.PLACEAFTER)
-        //activeDoc.activeLayer = doc.layers[1];
-        //activeDoc.activeLayer.opacity= 50;
-        //docRef.layers["Layer 1"]
-
-
-        /*var layerRef = doc.layers[0];
-        layerRef.move(duplicatedLayer, ElementPlacement.PLACEAFTER)*/
-
         return 1;
-        
     }catch(err) {
         return err;
     }
@@ -70,5 +50,4 @@ function createMaps(extensionRoot){
     }catch(err) {
         return err;
     }
-
 }
