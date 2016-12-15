@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ExtensionManifest
+    ExtensionBundleId="com.texturingtools"
+    ExtensionBundleName="Texturing Tools"
+    ExtensionBundleVersion="1.0"
+    Author="Pau"
+    Contact="pau.fernandez92@gmail.com"
+    Legal="GPA"
+    Version="4.0">
+    <ExtensionList><!--Extensions included and their version-->
+        <Extension Id="com.texturingtools.extensionphotoshop" Version="1.0"/>
+    </ExtensionList>
+    <ExecutionEnvironment>
+        <HostList><!--In which programs and versions the extension will be compatible-->
+            <Host Name="PHXS" Version="14.0"/>
+        </HostList>
+        <LocaleList><!--Defines the locales your extension will work in-->
+            <Locale Code="All"/>
+        </LocaleList>
+        <RequiredRuntimeList>
+            <RequiredRuntime Name="CSXS" Version="4.0"/>
+        </RequiredRuntimeList>
+    </ExecutionEnvironment>
+    <DispatchInfoList>
+        <Extension Id="com.texturingtools.extensionphotoshop"><!--Definition of our extension. The id should match the <ExtensionList> one.-->
+            <DispatchInfo>
+                <Resources><!--List of the files we will use -->
+                    <MainPath>./index.html</MainPath><!--Path to the extension's home-page HTML file. -->
+                    <ScriptPath>./jsx/photoshop.jsx</ScriptPath>
+                    <ScriptPath>./jsx/NormalToAO.jsx</ScriptPath>
+
+                </Resources>
+                <Lifecycle><!--Specifies the behavior at startup and shutdown-->
+                    <AutoVisible>true</AutoVisible><!--Make the extension’s UI visible automatically when launched-->
+                    <StartOn>
+                        <Event>applicationActivate</Event>
+                    </StartOn>
+                </Lifecycle>
+                <UI><!--Define the window type of the extension-->
+                    <Type>Panel</Type>
+                    <Menu>Texturing Tools</Menu>
+                    <Geometry>
+                        <Size>
+                            <Height>400</Height>
+                            <Width>400</Width>
+                        </Size>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+    </DispatchInfoList>
+</ExtensionManifest>
